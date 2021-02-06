@@ -41,8 +41,45 @@ class TableViewController: UITableViewController {
         
         return cell
     }
-   
-
+    
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+            
+        let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (contextualAction, view, boolValue) -> Void in
+            
+            let shareMenu = UIAlertController(title:nil, message: "Share using", preferredStyle: .actionSheet)
+            
+            let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertAction.Style.default, handler: nil)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            shareMenu.addAction(twitterAction)
+            shareMenu.addAction(cancelAction)
+            
+            self.present(shareMenu, animated: true, completion: nil)
+            
+        })
+        
+        let rateAction = UIContextualAction(style: .normal, title: "Rate", handler: { (contextualAction, view, boolValue) -> Void in
+          
+            let rateMenu = UIAlertController(title: nil, message: "Rate this App", preferredStyle: .actionSheet)
+            
+            let appRateAction = UIAlertAction(title: "Rate", style: .default, handler: nil)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            rateMenu.addAction(appRateAction)
+            rateMenu.addAction(cancelAction)
+            
+            self.present(rateMenu, animated: true, completion: nil)
+            
+        })
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [shareAction,rateAction])
+        return swipeActions
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
